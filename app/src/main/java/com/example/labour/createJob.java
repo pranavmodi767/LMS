@@ -20,7 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class createJob extends AppCompatActivity {
 
-    private EditText jobName,jobDisription,jobLocation,jobPay,jobRequirements;
+    private EditText jobName,jobDisription,jobLocation,jobPay;
+    private EditText jobRequirements;
     private Button jobBtn;
     private String count;
 
@@ -40,7 +41,7 @@ public class createJob extends AppCompatActivity {
         jobDisription = findViewById(R.id.jobDiscription);
         jobLocation =findViewById(R.id.jobLocation);
         jobPay =findViewById(R.id.jobPay);
-        jobRequirements =findViewById(R.id.jobRequirements);
+        jobRequirements = findViewById(R.id.jobRequirements);
 
         jobBtn =findViewById(R.id.jobBtn);
         jobBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,7 @@ public class createJob extends AppCompatActivity {
         String JobDiscription=jobDisription.getText().toString().trim();
         String JobLocation = jobLocation.getText().toString().trim();
         String JobPay = jobPay.getText().toString().trim();
-        String JobRequirements=jobRequirements.toString().trim();
+        String JobRequirements=jobRequirements.getText().toString().trim();
 
         Toast.makeText(createJob.this,"Starting",Toast.LENGTH_LONG).show();
         Job hob = new Job(JobName,JobDiscription,JobLocation,JobPay,JobRequirements);

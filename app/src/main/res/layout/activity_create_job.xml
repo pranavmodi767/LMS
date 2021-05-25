@@ -61,26 +61,14 @@
         android:id="@+id/jobPay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="44dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Pay"
         app:layout_constraintBottom_toTopOf="@+id/jobRequirements"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toEndOf="@+id/textView19" />
-
-    <EditText
-        android:id="@+id/jobRequirements"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="136dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Additional Requirements"
-        app:layout_constraintBottom_toTopOf="@+id/jobBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toEndOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/textView17"
@@ -131,5 +119,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/jobRequirements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Job Requirements"
+        app:layout_constraintBottom_toTopOf="@+id/jobBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.224"
+        app:layout_constraintStart_toEndOf="@+id/textView20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
