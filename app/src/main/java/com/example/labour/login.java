@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +24,7 @@ public class login extends AppCompatActivity {
 
     private EditText userName;
     private EditText userPass;
+    private Spinner loginRole;
     Button button;
 
     public void register(View v){
@@ -38,6 +41,12 @@ public class login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userName = findViewById(R.id.loginName);
         userPass = findViewById(R.id.loginPass);
+
+        loginRole =findViewById(R.id.loginRole);
+        String[] items = new String[]{"Worker", "Employer"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,items);
+        loginRole.setAdapter(adapter);
+        String Roole =loginRole.getSelectedItem().toString().trim();
 
         button =findViewById(R.id.butt);
         button.setOnClickListener(new View.OnClickListener() {
@@ -57,14 +66,23 @@ public class login extends AppCompatActivity {
                     userPass.requestFocus();
                     return;
                 }
+                String Roole =loginRole.getSelectedItem().toString().trim();
                 mAuth.signInWithEmailAndPassword(name,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         Toast.makeText(login.this,"Login Successful",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent( getApplicationContext(),MainActivity.class));
-                        finish();
-                    }
+                        if(Roole.equals("Worker")) {
+                            startActivity(new Intent(getApplicationContext(),worker.class));
+                            finish();
+                        }else if (Roole.equals("Employer")) {
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
+                        }else {
+                            Toast.makeText(login.this,"Select A role",Toast.LENGTH_SHORT).show();
+                        }
+                        }
+
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -75,13 +93,4 @@ public class login extends AppCompatActivity {
             }
         });
     }
-/*    @Override
-    protected void onStart() {
-
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            finish();
-        }
-    }*/
 }
