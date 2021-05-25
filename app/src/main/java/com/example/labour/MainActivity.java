@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity  {
 
 
+    private TextView createJob;
     Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,14 @@ public class MainActivity extends AppCompatActivity  {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(),login.class));
                 finish();
+            }
+        });
+
+        createJob=findViewById(R.id.createjob);
+        createJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),createJob.class));
             }
         });
     }
