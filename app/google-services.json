@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1037611868919",
+    "project_id": "lmbs-ac8f1",
+    "storage_bucket": "lmbs-ac8f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037611868919:android:81db19c77bf44605dba9f2",
+        "android_client_info": {
+          "package_name": "com.example.labour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037611868919-il7236csq69f2t6hkaboauh4mi106d0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2IfbE64swd3GkFjV4Qrv4vxRaB3D_oJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037611868919-il7236csq69f2t6hkaboauh4mi106d0p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
