@@ -68,24 +68,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="job done"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="339dp" />
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="356dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="current jobs/History"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="386dp" />
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="392dp" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="current job status"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="435dp" />
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="437dp" />
 
     <RatingBar
         android:id="@+id/ratingBar"
