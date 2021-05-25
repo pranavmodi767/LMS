@@ -59,6 +59,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="register"
         android:text="Register Now!"
         app:layout_constraintBottom_toTopOf="@+id/butt"
         app:layout_constraintEnd_toEndOf="parent"
