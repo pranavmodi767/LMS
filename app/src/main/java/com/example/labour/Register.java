@@ -3,9 +3,11 @@ package com.example.labour;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     private EditText email;
     private EditText age;
     private EditText pass;
+
+    private Spinner role,proffesion;
 
 
     ProgressBar progressBar;
@@ -58,10 +62,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         button.setOnClickListener((View.OnClickListener) this);
         name = findViewById(R.id.loginName);
         mobile = findViewById(R.id.mobile);
-        aadhar = findViewById(R.id.aadhar);
         email = findViewById(R.id.email);
         age =findViewById(R.id.age);
         pass=findViewById(R.id.loginPass);
+
+        role =findViewById(R.id.role);
+        String[] items = new String[]{"Employer", "Worker"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        role.setAdapter(adapter);
+
+
+        proffesion =findViewById(R.id.proffesion);
+        String[] proff = new String[]{"None", "Sweeper","Peon","Cook","Electrician","Painter","Constructer","Security Guard"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, proff);
+        proffesion.setAdapter(adapter2);
+
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
@@ -84,11 +99,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         String Name = name.getText().toString().trim();
         String Mobile = mobile.getText().toString().trim();
-        String Aadhar =aadhar.getText().toString().trim();
         String Email = email.getText().toString().trim();
         String Age = age.getText().toString().trim();
         String Pass =pass.getText().toString().trim();
-
+        String Role =role.getSelectedItem().toString().trim();
+        String Proffesion=proffesion.getSelectedItem().toString().trim();
 
         if(Name.isEmpty()){
             name.setError("invalid name");
@@ -109,12 +124,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
 
         }
-        if(Aadhar.isEmpty()){
-            aadhar.setError("Enter Valid number");
-            aadhar.requestFocus();
 
-
-        }
         if (Age.isEmpty() ){
             age.setError("Enter Valid Age");
             age.requestFocus();
@@ -130,7 +140,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
                         if(task.isSuccessful()){
                            // Toast.makeText(Register.this,"Registration Successful",Toast.LENGTH_SHORT).show();
-                           Users abuser = new Users(Name,Mobile,Aadhar,Email,Age);
+                           Users abuser = new Users(Name,Mobile,Email,Age,Role,Proffesion);
 
                             database = FirebaseDatabase.getInstance();
                             myRef = database.getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
