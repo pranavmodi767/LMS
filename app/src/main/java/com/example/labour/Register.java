@@ -150,8 +150,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        myRef = database.getReference().child("JobCount").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                        myRef.setValue("0");
+
                                         Toast.makeText(Register.this,"Registration Successful",Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(getApplicationContext(),login.class));

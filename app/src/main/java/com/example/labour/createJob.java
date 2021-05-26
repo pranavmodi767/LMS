@@ -3,6 +3,7 @@ package com.example.labour;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +25,6 @@ public class createJob extends AppCompatActivity {
     private EditText jobName,jobDisription,jobLocation,jobPay;
     private EditText jobRequirements;
     private Button jobBtn;
-    private String count;
 
     FirebaseAuth mAuth;
     FirebaseDatabase database;
@@ -54,33 +55,27 @@ public class createJob extends AppCompatActivity {
     }
 
 
-    public void job() throws NullPointerException{
+    public void job(){
         String JobName =jobName.getText().toString().trim();
         String JobDiscription=jobDisription.getText().toString().trim();
         String JobLocation = jobLocation.getText().toString().trim();
         String JobPay = jobPay.getText().toString().trim();
         String JobRequirements=jobRequirements.getText().toString().trim();
 
-        Toast.makeText(createJob.this,"Starting",Toast.LENGTH_LONG).show();
+
         Job hob = new Job(JobName,JobDiscription,JobLocation,JobPay,JobRequirements);
 
-
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference().child("JobCount").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull  DataSnapshot snapshot) {
-                count =snapshot.getValue(String.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(createJob.this,"Failed To Read Count",Toast.LENGTH_SHORT).show();
-            }
-        });
-        count +=1;
-        myRef.setValue(count);
-        myRef =database.getReference().child("Jobs").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(count);
+        SharedPreferences countSettings = getSharedPreferences("count", 0);
+        // get current counts
+        int count = countSettings.getInt("counts",0);
+        count++;
+        final SharedPreferences.Editor edit = countSettings.edit();
+        edit.putInt("counts",count);
+        edit.commit();
+
+        myRef =database.getReference().child("Jobs").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(String.valueOf(count));
         myRef.setValue(hob).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -91,5 +86,6 @@ public class createJob extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
