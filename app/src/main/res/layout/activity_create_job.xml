@@ -10,12 +10,12 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="44dp"
         android:text="Subject"
         app:layout_constraintBottom_toTopOf="@+id/textView17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintVertical_bias="0.575" />
 
     <EditText
         android:id="@+id/jobName"
@@ -94,7 +94,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="56dp"
         android:layout_marginBottom="56dp"
         android:text="pay"
         app:layout_constraintBottom_toTopOf="@+id/textView20"
@@ -104,33 +104,54 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="108dp"
         android:text="Requiremnts"
-        app:layout_constraintBottom_toTopOf="@+id/jobBtn"
+        app:layout_constraintBottom_toTopOf="@+id/textView25"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/jobBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="112dp"
         android:text="create Job"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/jobRequirements"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="76dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Job Requirements"
+        app:layout_constraintBottom_toTopOf="@+id/assign"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintStart_toEndOf="@+id/textView20" />
+
+    <Spinner
+        android:id="@+id/assign"
+        android:layout_width="250dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/jobBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.224"
-        app:layout_constraintStart_toEndOf="@+id/textView20" />
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintStart_toEndOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="68dp"
+        android:text="Assign To:"
+        app:layout_constraintBottom_toTopOf="@+id/jobBtn"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

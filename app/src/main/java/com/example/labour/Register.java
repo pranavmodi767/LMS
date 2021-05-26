@@ -160,6 +160,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                                     }
                                 }
                             });
+
+                            myRef =database.getReference().child("Workers").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            if(Role.equals("Worker")){
+                                myRef.setValue(Name+":"+Proffesion);
+                            }
                         }else {
                             Toast.makeText(Register.this,"Registration Failed",Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
