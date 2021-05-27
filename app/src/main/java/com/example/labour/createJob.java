@@ -112,7 +112,7 @@ public class createJob extends AppCompatActivity {
         edit.putInt("counts",count);
         edit.commit();
 
-        Job hob = new Job(JobName,JobDiscription,JobLocation,JobPay,JobRequirements);
+        Job hob = new Job(Assign,JobName,JobDiscription,JobLocation,JobPay,JobRequirements);
 
         myRef =database.getReference().child("Jobs").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(String.valueOf(count));
         myRef.setValue(hob).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -182,5 +182,7 @@ public class createJob extends AppCompatActivity {
         Log.d("bat",batMobile);
         Log.d("bat",batMessage);
         //Send batMessage String to the batMobile
+
+
     }
 }

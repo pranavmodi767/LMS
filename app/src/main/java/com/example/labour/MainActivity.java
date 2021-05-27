@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
     private TextView createJob;
+    private TextView history;
     Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,13 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),createJob.class));
+            }
+        });
+        history=findViewById(R.id.history);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),history.class));
             }
         });
     }
