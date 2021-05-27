@@ -169,7 +169,18 @@ public class createJob extends AppCompatActivity {
         Log.d("details",jobRequirements);
         Log.d("details",String.valueOf(mob));
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("Subject: "+jobName+
+                "\nDiscription: "+jobDiscription+
+                "\nLocation: "+jobLocation+
+                "\nPayment: "+jobPay+
+                "\nRequirements:"+jobRequirements);
 
+        String batMobile = mob;
+        String batMessage =sb.toString();
 
+        Log.d("bat",batMobile);
+        Log.d("bat",batMessage);
+        //Send batMessage String to the batMobile
     }
 }
