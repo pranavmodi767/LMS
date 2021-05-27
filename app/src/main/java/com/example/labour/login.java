@@ -24,7 +24,6 @@ public class login extends AppCompatActivity {
 
     private EditText userName;
     private EditText userPass;
-    private Spinner loginRole;
     Button button;
 
     public void register(View v){
@@ -41,12 +40,6 @@ public class login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userName = findViewById(R.id.loginName);
         userPass = findViewById(R.id.loginPass);
-
-        loginRole =findViewById(R.id.loginRole);
-        String[] items = new String[]{"Worker", "Employer"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,items);
-        loginRole.setAdapter(adapter);
-        String Roole =loginRole.getSelectedItem().toString().trim();
 
         button =findViewById(R.id.butt);
         button.setOnClickListener(new View.OnClickListener() {
@@ -66,21 +59,15 @@ public class login extends AppCompatActivity {
                     userPass.requestFocus();
                     return;
                 }
-                String Roole =loginRole.getSelectedItem().toString().trim();
+
                 mAuth.signInWithEmailAndPassword(name,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         Toast.makeText(login.this,"Login Successful",Toast.LENGTH_LONG).show();
-                        if(Roole.equals("Worker")) {
-                            startActivity(new Intent(getApplicationContext(),worker.class));
-                            finish();
-                        }else if (Roole.equals("Employer")) {
+
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                            finish();
-                        }else {
-                            Toast.makeText(login.this,"Select A role",Toast.LENGTH_SHORT).show();
-                        }
+
                         }
 
                 }).addOnFailureListener(new OnFailureListener() {

@@ -5,15 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,7 @@ public class createJob extends AppCompatActivity {
     private EditText jobRequirements;
     private Button jobBtn;
     private Spinner assign;
+    private ProgressBar pp;
 
     FirebaseAuth mAuth;
     FirebaseDatabase database;
@@ -50,6 +52,9 @@ public class createJob extends AppCompatActivity {
         jobPay =findViewById(R.id.jobPay);
         jobRequirements = findViewById(R.id.jobRequirements);
 
+        pp =findViewById(R.id.pp);
+
+        pp.setVisibility(View.VISIBLE);
         ArrayList<String> list = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
         assign.setAdapter(adapter);
@@ -66,14 +71,14 @@ public class createJob extends AppCompatActivity {
                     list.add(snappy.getValue().toString());
                 }
                 adapter.notifyDataSetChanged();
+                pp.setVisibility(View.GONE);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
+        //pp.setVisibility(View.GONE);
         jobBtn =findViewById(R.id.jobBtn);
         jobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +100,8 @@ public class createJob extends AppCompatActivity {
         String JobPay = jobPay.getText().toString().trim();
         String JobRequirements=jobRequirements.getText().toString().trim();
 
+        String Assign =assign.getSelectedItem().toString().trim();
+
         database = FirebaseDatabase.getInstance();
 
         SharedPreferences countSettings = getSharedPreferences("count", 0);
@@ -112,12 +119,57 @@ public class createJob extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(createJob.this, "Job Created Successfully!", Toast.LENGTH_LONG).show();
+                   Toast.makeText(createJob.this, "Job Created Successfully!", Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(createJob.this,"Failed to Create Job!",Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        getMob(Assign,JobName,JobDiscription,JobLocation,JobPay,JobRequirements);
+    }
+
+    private void getMob(String assign, String jobName, String jobDiscription, String jobLocation, String jobPay, String jobRequirements) {
+
+
+        String[] str =assign.split(":",0);
+       Toast.makeText(createJob.this,str[0],Toast.LENGTH_SHORT).show();
+
+        database =FirebaseDatabase.getInstance();
+        myRef =database.getReference().child("Users");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Log.d("name", String.valueOf(snap.child("name")));
+                    if(snap.child("name").getValue().equals(str[0].trim())){
+                        Log.d("snap","Found");
+                        String mob=snap.child("mobile").getValue().toString().trim();
+                        //Toast.makeText(createJob.this,mob,Toast.LENGTH_SHORT).show();
+                        sendMsg(mob,jobName,jobDiscription,jobLocation,jobPay,jobRequirements);
+                    }else {
+                        Log.d("snap","Not Found");
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void sendMsg(String mob,String jobName, String jobDiscription, String jobLocation, String jobPay,String jobRequirements) {
+
+        //Toast.makeText(createJob.this,String.valueOf(mob),Toast.LENGTH_SHORT).show();
+        Log.d("details",jobName);
+        Log.d("details",jobDiscription);
+        Log.d("details",jobLocation);
+        Log.d("details",jobPay);
+        Log.d("details",jobRequirements);
+        Log.d("details",String.valueOf(mob));
+
+
 
     }
 }
